@@ -1,3 +1,4 @@
+
 import WelcomeForm from "./WelcomeForm";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -20,24 +21,30 @@ function getTimeLeft() {
   };
 }
 
+const letterMessage =
+  "You make ordinary moments feel magical. If I could choose one person to meet in every lifetime, I would choose you every single time. You make my world brighter just by being in it. My Princess, you deserve endless happiness, beautiful memories, and all the love this world can offer. No matter how ordinary a day may seem, it becomes special when you're part of it. ❤️";
+
 function App() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
 
   const [isBirthday, setIsBirthday] = useState(() => {
     const today = new Date();
-
-    return  today.getMonth() === 5 && today.getDate() === 3;;
+    return today.getMonth() === 5 && today.getDate() === 3;
   });
 
   const [showLetter, setShowLetter] = useState(false);
+  const [typedMessage, setTypedMessage] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [herName, setHerName] = useState("");
 
+  // Update countdown and birthday status every second.
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
 
-      setIsBirthday(today.getMonth() === 5 && today.getDate() === 3);
+      setIsBirthday(
+        now.getMonth() === 5 && now.getDate() === 3
+      );
 
       setTimeLeft(getTimeLeft());
     }, 1000);
@@ -45,19 +52,43 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // Animate the letter's text when the letter is opened.
+  useEffect(() => {
+    if (!showLetter) {
+      setTypedMessage("");
+      return;
+    }
+
+    let index = 0;
+
+    const typingTimer = setInterval(() => {
+      index++;
+
+      setTypedMessage(letterMessage.slice(0, index));
+
+      if (index >= letterMessage.length) {
+        clearInterval(typingTimer);
+      }
+    }, 28);
+
+    return () => clearInterval(typingTimer);
+  }, [showLetter]);
+
+  // Show the welcome quiz before revealing the main website.
   if (!isUnlocked) {
-  return (
-    <WelcomeForm
-      onUnlock={(name) => {
-        setHerName(name);
-        setIsUnlocked(true);
-      }}
-    />
-  );
+    return (
+      <WelcomeForm
+        onUnlock={(name) => {
+          setHerName(name);
+          setIsUnlocked(true);
+        }}
+      />
+    );
   }
 
   return (
     <main className="page">
+      {/* Background stars */}
       <div className="stars" aria-hidden="true">
         {Array.from({ length: 35 }, (_, index) => (
           <span
@@ -74,26 +105,29 @@ function App() {
         ))}
       </div>
 
+      {/* Background glow */}
       <div className="glow glow-one" />
       <div className="glow glow-two" />
 
+      {/* Birthday confetti */}
       {isBirthday && (
-  <div className="confetti-container">
-    {Array.from({ length: 60 }, (_, index) => (
-      <span
-        key={index}
-        className="confetti"
-        style={{
-          left: `${(index * 37) % 100}%`,
-          animationDelay: `${(index % 10) * 0.3}s`,
-          animationDuration: `${3 + (index % 5)}s`,
-        }}
-      >
-        {index % 2 === 0 ? "♥" : "✦"}
-      </span>
-    ))}
-  </div>
-  )};
+        <div className="confetti-container" aria-hidden="true">
+          {Array.from({ length: 60 }, (_, index) => (
+            <span
+              key={index}
+              className="confetti"
+              style={{
+                left: `${(index * 37) % 100}%`,
+                animationDelay: `${(index % 10) * 0.3}s`,
+                animationDuration: `${3 + (index % 5)}s`,
+              }}
+            >
+              {index % 2 === 0 ? "♥" : "✦"}
+            </span>
+          ))}
+        </div>
+      )}
+
       <section className="birthday-card">
         <div className="crown">♕</div>
 
@@ -102,12 +136,12 @@ function App() {
         <h1>
           {isBirthday ? (
             <>
-            Happy Birthday,
-            <span>My Princess! ❤️</span>
+              Happy Birthday,
+              <span>My Princess! ❤️</span>
             </>
           ) : (
             <>
-            For My <span> Princess </span>
+              For My <span>Princess</span>
             </>
           )}
         </h1>
@@ -116,23 +150,23 @@ function App() {
           <span>♡</span>
         </div>
 
-
         <p className="intro">
           {isBirthday ? (
-          <>
-          Today is all about you, my love. 💖
-          <br/>
-          You deserve every beautiful thing in this world. ✨
-          </>
+            <>
+              Today is all about you, my love. 💖
+              <br />
+              You deserve every beautiful thing in this world. ✨
+            </>
           ) : (
-          <>
-          Somewhere between all the stars,
-          <br />
-          you became my favourite one. ✨
-          </>
+            <>
+              Somewhere between all the stars,
+              <br />
+              you became my favourite one. ✨
+            </>
           )}
         </p>
 
+        {/* Birthday surprise */}
         {isBirthday && (
           <div className="birthday-surprise">
             <span className="surprise-icon">🎂</span>
@@ -140,7 +174,7 @@ function App() {
             <h2>Today Is Your Day!</h2>
 
             <p>
-              May your smile shine brighter than every star 
+              May your smile shine brighter than every star
               and your heart always be surrounded by love. 💗
             </p>
 
@@ -148,30 +182,33 @@ function App() {
           </div>
         )}
 
+        {/* Countdown label */}
         {!isBirthday && (
           <div className="birthday-label">
-          <span className="tiny-heart">♥</span>
-          COUNTING DOWN TO YOUR SPECIAL DAY
-          <span className="tiny-heart">♥</span>
+            <span className="tiny-heart">♥</span>
+            COUNTING DOWN TO YOUR SPECIAL DAY
+            <span className="tiny-heart">♥</span>
           </div>
         )}
 
+        {/* Countdown timer */}
         {!isBirthday && (
           <div className="countdown">
-          {[
-            { label: "DAYS", value: timeLeft.days },
-            { label: "HOURS", value: timeLeft.hours },
-            { label: "MINUTES", value: timeLeft.minutes },
-            { label: "SECONDS", value: timeLeft.seconds },
-          ].map((item) => (
-            <div className="time-box" key={item.label}>
-              <div className="time-number">
-                {String(item.value).padStart(2, "0")}
+            {[
+              { label: "DAYS", value: timeLeft.days },
+              { label: "HOURS", value: timeLeft.hours },
+              { label: "MINUTES", value: timeLeft.minutes },
+              { label: "SECONDS", value: timeLeft.seconds },
+            ].map((item) => (
+              <div className="time-box" key={item.label}>
+                <div className="time-number">
+                  {String(item.value).padStart(2, "0")}
+                </div>
+
+                <div className="time-label">{item.label}</div>
               </div>
-              <div className="time-label">{item.label}</div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         )}
 
         <p className="birthday-date">♡ &nbsp; JUNE 3 &nbsp; ♡</p>
@@ -186,36 +223,81 @@ function App() {
           it would be to see you smile every day. 💗
         </p>
 
+        {/* Animated love letter button */}
         <button
-          className="letter-button"
-          onClick={() => setShowLetter(!showLetter)}
+          className={`letter-button ${showLetter ? "letter-open" : ""}`}
+          onClick={() => setShowLetter((previous) => !previous)}
+          aria-expanded={showLetter}
+          aria-controls="princess-love-letter"
         >
-          {showLetter ? "Close My Little Secret ♥" : "Open Your Little Surprise ♡"}
+          {showLetter
+            ? "Close My Little Secret ♥"
+            : "💌 Open Your Little Surprise"}
         </button>
 
+        {/* Animated love letter */}
         {showLetter && (
-          <div className="love-letter">
-            <span className="letter-heart">💌</span>
-            <h2>To My Princess</h2>
-            <p>
-              You make ordinary moments feel magical, and the world feels
-              a little brighter because you're in it. Until your special
-              day arrives, here's a little reminder: you deserve all the
-              love, happiness, and beautiful things this world can offer.
+          <div
+            className="love-letter letter-reveal"
+            id="princess-love-letter"
+          >
+            <div className="envelope-glow">💌</div>
+
+            <p className="letter-topline">
+              A LITTLE LETTER FROM MY HEART
             </p>
-            <p className="letter-signature">With love, always ♥</p>
+
+            <h2>To My Princess 👑</h2>
+
+            <div className="letter-divider">♡ ✦ ♡</div>
+
+            <p className="letter-body">
+              {typedMessage}
+
+              {typedMessage.length < letterMessage.length && (
+                <span className="typing-cursor" aria-hidden="true">
+                  |
+                </span>
+              )}
+            </p>
+
+            {/* Reveal the ending after typing finishes */}
+            {typedMessage.length === letterMessage.length && (
+              <div className="letter-ending">
+                <p>In every universe, it's still you. 💗</p>
+
+                <p className="letter-signature">
+                  With all my love,
+                  <br />
+                  <span>Forever yours ♥</span>
+                </p>
+              </div>
+            )}
           </div>
         )}
 
         <p className="footer">MADE WITH ♡, JUST FOR YOU</p>
       </section>
 
-      <div className="floating-heart heart-one" aria-hidden="true">♡</div>
-      <div className="floating-heart heart-two" aria-hidden="true">♥</div>
-      <div className="floating-heart heart-three" aria-hidden="true">♡</div>
-      <div className="floating-heart heart-four" aria-hidden="true">♥</div>
+      {/* Floating hearts */}
+      <div className="floating-heart heart-one" aria-hidden="true">
+        ♡
+      </div>
+
+      <div className="floating-heart heart-two" aria-hidden="true">
+        ♥
+      </div>
+
+      <div className="floating-heart heart-three" aria-hidden="true">
+        ♡
+      </div>
+
+      <div className="floating-heart heart-four" aria-hidden="true">
+        ♥
+      </div>
     </main>
   );
 }
 
 export default App;
+
