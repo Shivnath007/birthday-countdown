@@ -1,0 +1,480 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 45%, #29152f 0%, transparent 55%),
+    linear-gradient(135deg, #100c19, #170d20 50%, #0d0b17);
+  color: #f9eaf4;
+  font-family: "Inter", sans-serif;
+}
+
+.birthday-card {
+  width: min(100%, 700px);
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 55px 42px 35px;
+  border: 1px solid rgba(239, 173, 210, 0.25);
+  border-radius: 240px 240px 24px 24px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.045),
+    rgba(255, 255, 255, 0.012)
+  );
+  box-shadow:
+    0 0 80px rgba(207, 91, 173, 0.08),
+    inset 0 0 50px rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 1.3s ease both;
+}
+
+.crown {
+  font-size: 43px;
+  line-height: 1;
+  color: #f5a6d1;
+  margin-bottom: 24px;
+  text-shadow: 0 0 25px rgba(246, 155, 207, 0.65);
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  line-height: 1.8;
+  color: #b27bb4;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: clamp(43px, 8vw, 70px);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+h1 span {
+  display: block;
+  font-style: italic;
+  color: #f3b4d6;
+  text-shadow: 0 0 35px rgba(238, 137, 195, 0.25);
+}
+
+.heart-divider {
+  margin: 17px 0;
+  color: #ef9dc7;
+  font-size: 27px;
+}
+
+.intro {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  line-height: 1.6;
+  color: #b896bb;
+  margin: 0 0 35px;
+}
+
+.birthday-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #d9a9d1;
+  margin-bottom: 20px;
+}
+
+.tiny-heart {
+  color: #ee9bc6;
+  font-size: 10px;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.time-box {
+  padding: 18px 4px 15px;
+  border: 1px solid rgba(235, 169, 213, 0.23);
+  border-radius: 13px;
+  background: rgba(245, 192, 226, 0.035);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.time-box:hover {
+  transform: translateY(-4px);
+  background: rgba(245, 192, 226, 0.09);
+}
+
+.time-number {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(28px, 5vw, 43px);
+  color: #ffe4f3;
+  line-height: 1.1;
+}
+
+.time-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  color: #bd9ebf;
+}
+
+.birthday-date {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #f3c3df;
+}
+
+.separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28px 0 20px;
+  color: #efb2d4;
+  font-size: 19px;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  height: 1px;
+  width: 75px;
+  margin: 0 15px;
+  background: linear-gradient(90deg, transparent, #b97da9);
+}
+
+.separator::after {
+  transform: rotate(180deg);
+}
+
+.love-message {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  line-height: 1.7;
+  color: #e5d0e5;
+  margin: 0 0 28px;
+}
+
+.letter-button {
+  display: inline-block;
+  max-width: 100%;
+  padding: 14px 24px;
+  border: 1px solid rgba(250, 192, 225, 0.55);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #eab1d3, #c58dbd);
+  color: #28152b;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(229, 149, 200, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.letter-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(229, 149, 200, 0.3);
+}
+
+.love-letter {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid rgba(239, 173, 210, 0.25);
+  border-radius: 18px;
+  background: rgba(23, 12, 31, 0.7);
+  animation: fadeIn 0.6s ease both;
+}
+
+.letter-heart {
+  font-size: 32px;
+}
+
+.love-letter h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 31px;
+  font-weight: 500;
+  color: #f5c4df;
+}
+
+.love-letter p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #e0cce0;
+}
+
+.love-letter .letter-signature {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  font-style: italic;
+  color: #f3b4d6;
+}
+
+.footer {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #a78aaa;
+  margin: 35px 0 0;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  font-size: 13px;
+  color: #f3c4e3;
+  opacity: 0.4;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glow-one {
+  background: rgba(178, 67, 158, 0.18);
+  top: 5%;
+  left: -130px;
+}
+
+.glow-two {
+  background: rgba(119, 76, 190, 0.16);
+  bottom: 0;
+  right: -130px;
+}
+
+.floating-heart {
+  position: absolute;
+  z-index: 1;
+  color: rgba(244, 163, 211, 0.5);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+.heart-one {
+  top: 12%;
+  left: 12%;
+  font-size: 35px;
+}
+
+.heart-two {
+  top: 30%;
+  right: 10%;
+  font-size: 22px;
+  animation-delay: 1s;
+}
+
+.heart-three {
+  bottom: 13%;
+  left: 15%;
+  font-size: 25px;
+  animation-delay: 2s;
+}
+
+.heart-four {
+  bottom: 22%;
+  right: 12%;
+  font-size: 34px;
+  animation-delay: 0.5s;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(8deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 30px 13px;
+  }
+
+  .birthday-card {
+    padding: 48px 19px 28px;
+    border-radius: 150px 150px 20px 20px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .intro,
+  .love-message {
+    font-size: 19px;
+  }
+
+  .countdown {
+    gap: 7px;
+  }
+
+  .time-box {
+    padding: 14px 2px 12px;
+  }
+
+  .time-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .birthday-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .love-letter {
+    padding: 20px 16px;
+  }
+
+  .floating-heart {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.birthday-surprise {
+  margin: 25px 0;
+  padding: 25px 20px;
+  border: 1px solid rgba(243, 180, 214, 0.4);
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(213, 113, 183, 0.13),
+    rgba(124, 77, 161, 0.12)
+  );
+  animation: fadeIn 1s ease both;
+}
+
+.surprise-icon {
+  display: inline-block;
+  font-size: 42px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.birthday-surprise h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #f5c4df;
+  margin: 15px 0;
+}
+
+.birthday-surprise p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #e5d0e5;
+}
+
+.surprise-hearts {
+  color: #f3b4d6;
+  font-size: 24px;
+  letter-spacing: 10px;
+  margin-top: 15px;
+}
+
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.confetti {
+  position: absolute;
+  top: -30px;
+  color: #f3b4d6;
+  font-size: 20px;
+  opacity: 0;
+  animation: confetti-fall linear infinite;
+}
+
+.confetti:nth-child(3n) {
+  color: #f6d58c;
+  font-size: 15px;
+}
+
+.confetti:nth-child(3n + 1) {
+  color: #d5b8ff;
+  font-size: 24px;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
